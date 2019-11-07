@@ -10,7 +10,7 @@ const initialState = {
   error: ""
 };
 
-export const reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
   switch (action.type) {
     case START_FETCHING:
       return {
@@ -21,12 +21,19 @@ export const reducer = (state = initialState, action) => {
     case FETCH_SUCCESS:
       return {
         ...state,
+        isFetching: false,
+        error: "",
+        catFacts: action.payload
       };
     case FETCH_FAILURE:
       return {
         ...state,
+        error: action.payload,
+        isFetching: false
       };
     default:
       return state;
   }
 };
+
+export default reducer;
