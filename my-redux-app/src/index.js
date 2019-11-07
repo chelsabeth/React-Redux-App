@@ -5,16 +5,17 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
-import logger from "redux-logger";
+import thunk from "redux-thunk";
+// import logger from "redux-logger";
 
 import reducer from "./reducers/reducer";
 
-const store = createStore(reducer, applyMiddleware(logger));
+const store = createStore(reducer, applyMiddleware(thunk));
 console.log(store);
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(
-  <Provider store={store}>
+  <Provider store={store}> 
     <App />
   </Provider>,
   rootElement
