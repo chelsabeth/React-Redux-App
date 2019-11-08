@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux"; // bridge/connecting peice between react and redux
 
 import Fact from "./Facts"
+import { fetchFacts } from "../actions/actions";
 
   {/* handle all possible state in JSX:
             1) initial state
@@ -10,6 +11,10 @@ import Fact from "./Facts"
             4) error state */}
 
 const CatFacts = props => {
+    useEffect(() => {
+        // want to do this when our app first renders
+        props.fetchFacts();
+    }, [])
     if (props.isFetching) {
         return <h2>Loading Cat Facts...</h2>
     } // handles loading state
@@ -17,7 +22,7 @@ const CatFacts = props => {
         <div>
             {props.state && <p>{props.error}</p>} {/* handles error state */}
             {props.catFacts.map(fact => (
-                <Fact key={fact._id}/>
+                <Fact key={fact._id} fact={fact}/>
             ))}
         </div>
     );
@@ -31,4 +36,4 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps, {})(CatFacts);
+export default connect(mapStateToProps, {fetchFacts})(CatFacts);

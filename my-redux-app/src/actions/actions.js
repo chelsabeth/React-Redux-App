@@ -8,8 +8,8 @@ export const FETCH_FAILURE = "FETCH_FAILURE";
 export const fetchFacts = () => dispatch => {
         dispatch({ type: START_FETCHING })
         // do the async action inside here and dispatch an error or success action
-        axios.get("http://cat-fact.herokuapp.com/facts")
-        .then(res => dispatch({ type: FETCH_SUCCESS, payload: res.data }))
+        axios.get("https://cors-anywhere.herokuapp.com/http://cat-fact.herokuapp.com/facts")
+        .then(res => dispatch({ type: FETCH_SUCCESS, payload: res.data.all }))
         .catch(err => dispatch({ type: FETCH_FAILURE, payload: err.response }));
     };
 
@@ -21,3 +21,4 @@ export const fetchFacts = () => dispatch => {
 //         action(store.dispatch) // stop the action and call the function
 //     }
 // }
+
